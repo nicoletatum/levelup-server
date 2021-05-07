@@ -4,7 +4,7 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "LEVELUPPLEASE",
+            "name": "levelup",
             "database": "db.sqlite3"
         }
     ],
