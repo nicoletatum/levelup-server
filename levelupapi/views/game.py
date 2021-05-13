@@ -20,7 +20,7 @@ class Games(ViewSet):
         """
 
         # Uses the token passed in the `Authorization` header
-        gamer = Player.objects.get(user=request.auth.user)
+        player = Player.objects.get(user=request.auth.user)
 
         # Create a new Python instance of the Game class
         # and set its properties from what was sent in the
@@ -30,7 +30,7 @@ class Games(ViewSet):
         game.maker = request.data["maker"]
         game.number_of_players = request.data["numberOfPlayers"]
         game.skill_level = request.data["skillLevel"]
-        game.player = gamer
+        game.player = player
 
         # Use the Django ORM to get the record from the database
         # whose `id` is what the client passed as the
@@ -78,7 +78,7 @@ class Games(ViewSet):
         Returns:
             Response -- Empty body with 204 status code
         """
-        gamer = Player.objects.get(user=request.auth.user)
+        player = Player.objects.get(user=request.auth.user)
 
         # Do mostly the same thing as POST, but instead of
         # creating a new instance of Game, get the game record
@@ -88,7 +88,7 @@ class Games(ViewSet):
         game.maker = request.data["maker"]
         game.number_of_players = request.data["numberOfPlayers"]
         game.skill_level = request.data["skillLevel"]
-        game.player = gamer
+        game.player = player
 
         gametype = GameType.objects.get(pk=request.data["gameTypeId"])
         game.gametype = gametype
