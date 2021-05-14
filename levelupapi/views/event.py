@@ -89,6 +89,27 @@ class Events(ViewSet):
         except Exception as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    def update(self, request, pk=None):
+        """Handle PUT requests for a game
+
+        Returns:
+        Response -- Empty body with 204 status code
+        """
+        player = Player.objects.get(user=request.auth.user)
+
+        game = Game.objects.get(pk=pk)
+        game.name = request.data["name"]
+        game.maker = request.data["maker"]
+        game.number_of_players = request.data["numberOfPlayers"]
+        game.skill_level = request.data["skillLevel"]
+        game.player = player
+
+        gametype = GameType.objects.get(pk=request.data["gameTypeId"])
+        game.gametype = gametype
+        game.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
     def list(self, request):
         """Handle GET requests to events resource
 

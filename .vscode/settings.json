@@ -10,5 +10,6 @@
     ],
     "python.linting.pylintArgs": [
         "--django-settings-module=levelup.settings"
-    ]
+    ],
+    "python.formatting.provider": "black"
 }
