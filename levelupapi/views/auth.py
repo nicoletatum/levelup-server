@@ -1,4 +1,5 @@
 import json
+from rest_framework import status
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
@@ -42,7 +43,7 @@ def register_user(request):
     '''Handles the creation of a new gamer for authentication
 
     Method arguments:
-      request -- The full HTTP request object
+    request -- The full HTTP request object
     '''
 
     # Load the JSON string of the request body into a dict
@@ -72,4 +73,4 @@ def register_user(request):
 
     # Return the token to the client
     data = json.dumps({"token": token.key})
-    return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data, content_type='application/json', status=status.HTTP_201_CREATED)
